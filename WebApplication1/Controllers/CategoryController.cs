@@ -12,10 +12,32 @@ namespace WebApplication1.Controllers
         {
             _db = db;
         }
+        //fetch data
         public IActionResult Index()
         {
            IEnumerable<Category> objCategoryList = _db.Categories.ToList();
             return View(objCategoryList);
         }
+        //create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
+        //get
+        
+        public IActionResult Create()
+        {
+            return View();
+        }
+
     }
 }
