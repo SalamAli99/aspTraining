@@ -1,0 +1,14 @@
+﻿@model Category
+
+<h1>Edit Category</h1>
+
+<form method="post">
+    <label asp-for="Name" /><br>
+    <input asp-for="Name" type="text"><br>
+    <label asp-for="DisplayOrder" /><br>
+    <input asp-for="DisplayOrder" type="text">
+    <button type="submit" asp-controller="Category" asp-action="Edit" class="btn btn-success">Edit</button>
+    <button class="btn btn-primary" asp-action="Index" asp-controller="Category">Back To List</button>
+
+</form>
+

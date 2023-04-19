@@ -18,6 +18,15 @@ namespace WebApplication1.Controllers
            IEnumerable<Category> objCategoryList = _db.Categories.ToList();
             return View(objCategoryList);
         }
+
+        //get
+
+        public IActionResult Create()
+        {
+            return View();
+        }  
+
+
         //create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -32,11 +41,39 @@ namespace WebApplication1.Controllers
             }
             return View(obj);
         }
+
+
+
         //get
-        
-        public IActionResult Create()
+
+        public IActionResult Edit(int? id)
         {
-            return View();
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categoryFromDb = _db.Categories.Find(id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+
+
+        //Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Update(obj);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return View(obj);
         }
 
     }
