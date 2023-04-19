@@ -1,0 +1,14 @@
+﻿@model Category
+
+<h1>Create New Category</h1>
+
+<form method="post">
+    <label asp-for="Name" /><br>
+    <input disabled asp-for="Name" type="text"><br>
+    <label asp-for="DisplayOrder" /><br>
+    <input disabled asp-for="DisplayOrder" type="text">
+    <button  asp-controller="Category" asp-action="Delete" class="btn btn-danger">Delete</button>
+    <button class="btn btn-primary" asp-action="Index" asp-controller="Category">Back To List</button>
+
+</form>
+
